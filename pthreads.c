@@ -33,6 +33,10 @@ void *wc(void *voidin) {
 
 int main(int argc, char **argv) {
 
+	/* argv[0] is the name of the program so step past it */
+	argc--;
+	argv++;
+
 	Stopif(!argc, return 0, "Please give some file names on the command line.");
 	pthread_t threads[argc];
 	wc_struct s[argc];
