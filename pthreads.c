@@ -2,6 +2,10 @@
 #include "stopif.h"
 #include "string_utilities.h"
 #include <pthread.h>
+#include <glib.h> //mutexes
+
+long int global_wc;
+static _Thread_local int local_i;
 
 typedef struct {
 	int wc;
@@ -17,6 +21,9 @@ void *wc(void *voidin) {
 	{
 		return NULL;
 	}
+
+	static GMutex count_lock;
+
 	char *delimiters = " `!@#$%^&*()_-+={[]}|\\;:\",<>./?\n";
 	ok_array *words = ok_array_new(doc, delimiters);
 	if (!words)
@@ -26,6 +33,15 @@ void *wc(void *voidin) {
 
 	in->wc = words->length;
 	ok_array_free(words);
+
+	/*g_mutex_lock(&count_lock);*/
+
+	for (int i = 0; i < in->wc; i++)
+	{
+		global_wc++; //a slow global_wc += in->wc;
+	}
+
+	/*g_mutex_unlock(&count_lock);*/
 
 	return NULL;
 }
@@ -55,6 +71,9 @@ int main(int argc, char **argv) {
 	{
 		printf("%s:\t%i\n", argv[i], s[i].wc);
 	}
+
+	printf("The total: %li\n", global_wc);
+
 	return 0;
 }
 

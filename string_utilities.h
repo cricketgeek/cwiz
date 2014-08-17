@@ -4,7 +4,7 @@
 
 #define Sasprintf(write_to, ...) {			\
 	char *tmp_string_for_extend = write_to;	\
-	asprintf(&(write_to), __VA_ARGS__);		\
+	//asprintf(&(write_to), __VA_ARGS__);		\
 	free(tmp_string_for_extend);			\
 }
 
