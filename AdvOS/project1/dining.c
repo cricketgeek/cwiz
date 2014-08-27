@@ -63,9 +63,9 @@ void update_philo_state(int phil_id)
 		philo_states[phil_id] = EATING;
 		pthread_cond_signal(&chopstick_conds[phil_id]);
 	}
-	pthread_mutex_lock(&chopstick_mutex[phil_id]);
-	pthread_mutex_lock(&chopstick_mutex[left]);
-	pthread_mutex_lock(&chopstick_mutex[right]);			
+	pthread_mutex_unlock(&chopstick_mutex[phil_id]);
+	pthread_mutex_unlock(&chopstick_mutex[left]);
+	pthread_mutex_unlock(&chopstick_mutex[right]);			
 }
 
 void pickup_one_chopstick(int stick_id, int phil_id){
