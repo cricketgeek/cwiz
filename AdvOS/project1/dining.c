@@ -54,7 +54,7 @@ void pickup_one_chopstick(int stick_id, int phil_id){
   	double randTime = rand() / (RAND_MAX + 1.0);    
     ts.tv_sec += randTime * 10;
 
-  	double randTime = rand() / (RAND_MAX + 1.0);
+  	// double randTime = rand() / (RAND_MAX + 1.0);
   	printf("randTime is %f\n", randTime);
 
     ts.tv_sec += randTime;
