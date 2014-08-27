@@ -52,11 +52,12 @@ void pickup_one_chopstick(int stick_id, int phil_id){
     ts.tv_nsec = now.tv_usec * 1000; /* usec to nsec */
     /* add the offset to get timeout value */
   	double randTime = rand() / (RAND_MAX + 1.0);    
-    ts.tv_sec += (randTime * 100);
+    ts.tv_sec += randTime;
 
   	// double randTime = rand() / (RAND_MAX + 1.0);
   	printf("randTime is %f\n", randTime);
 
+  	printf("asctime of ts:%s",asctime(ts));
     //ts.tv_sec += randTime;
 
 	printf("\nWe are using time of %lld.%.9ld\n", (long long)ts.tv_sec, ts.tv_nsec);
