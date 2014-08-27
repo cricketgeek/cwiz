@@ -3,7 +3,7 @@
 /* No changes are needed to this file*/
 
 double const thinking_to_eating = 0.02;
-double const eating_to_thinking = 0.05;
+double const eating_to_thinking = 0.50;
 
 void eat(int phil_id){
   fprintf(stdout,"Philosopher %d eats\n", phil_id);
@@ -32,7 +32,7 @@ void* philosodine(void* arg){
     }
     else{
       servings--;
-      printf("%d servings left\n",servings);
+      fprintf(stdout,"%d servings left\n",servings);
       pthread_mutex_unlock(&servings_mutex);     
     }
 
