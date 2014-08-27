@@ -53,7 +53,7 @@ void pickup_one_chopstick(int stick_id, int phil_id){
     ts.tv_nsec = now.tv_usec * 1000; /* usec to nsec */
     /* add the offset to get timeout value */
   	double randTime = rand() / (RAND_MAX + 1.0);    
-    ts.tv_sec += (randTime + (int)stick_id) + 1;
+    ts.tv_sec += (randTime + (int)stick_id);
 
   	// double randTime = rand() / (RAND_MAX + 1.0);
   	printf("randTime is %f\n", randTime);
