@@ -17,7 +17,6 @@ struct timespec ts;
 
 pthread_mutex_t chopstick_mutex[5];
 pthread_cond_t chopstick_conds[5];
-int chopsticks[5];
 
 int phil_to_chopstick(int phil_id, direction_t d){
   return (phil_id + d) % 5;      
