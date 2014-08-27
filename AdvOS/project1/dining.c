@@ -36,7 +36,7 @@ int chopstick_to_phil(int stick_id, direction_t d){
 
 int left_of_phil(int phil_id)
 {
-	return (phil_id + (NUM_PHILOSOPHERS - 1) % NUM_PHILOSOPHERS);
+	return ((phil_id + (NUM_PHILOSOPHERS - 1) % NUM_PHILOSOPHERS);
 }
 
 int right_of_phil(int phil_id)
@@ -96,7 +96,7 @@ void putdown_chopsticks(int phil_id){
 
   	pthread_mutex_lock(&chopstick_mutex[phil_id]);
   	philo_states[phil_id] = THINKING;
-  	pthread_mutex_lock(&chopstick_mutex[phil_id]);
+  	pthread_mutex_unlock(&chopstick_mutex[phil_id]);
 
   	printf("philo %d now thinking...\n", phil_id);
 
