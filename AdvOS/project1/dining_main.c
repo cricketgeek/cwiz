@@ -73,7 +73,10 @@ int main(){
     pthread_join(phil_threads[i], NULL);    
   
   for(i = 0; i < 5; i++)
+  {
     pthread_mutex_destroy(&chopstick_mutex[i]); 
+    pthread_cond_destroy(&chopstick_conds[i]);
+  }
 
   return 0;
 }

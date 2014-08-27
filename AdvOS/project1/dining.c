@@ -48,7 +48,11 @@ void pickup_one_chopstick(int stick_id, int phil_id){
 #endif
 
   	double randTime = rand() / (RAND_MAX + 1.0);
+  	printf("randTime is %f\n", randTime);
+
     ts.tv_sec += randTime;
+
+	printf("\nWe are using time of %lld.%.9ld\n", (long long)ts.tv_sec, ts.tv_nsec);
 
 	pthread_mutex_lock(&chopstick_mutex[stick_id]);
    	rc = pthread_cond_timedwait(&chopstick_conds[stick_id],&chopstick_mutex[stick_id],&ts);
