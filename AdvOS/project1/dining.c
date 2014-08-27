@@ -80,7 +80,7 @@ void putdown_one_chopstick(int stick_id, int phil_id){
     printf("Philosopher %d puts down chopstick %d \n", phil_id, stick_id);
     fflush(stdout);
 	pthread_mutex_lock(&chopstick_mutex[stick_id]);
-	pthread_cond_broadcast(&chopstick_conds[stick_id]);
+	pthread_cond_signal(&chopstick_conds[stick_id]);
 	pthread_mutex_unlock(&chopstick_mutex[stick_id]);
 }
 
