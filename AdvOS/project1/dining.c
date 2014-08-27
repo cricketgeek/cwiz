@@ -47,17 +47,16 @@ int right_of_phil(int phil_id)
 void update_philo_state(int phil_id)
 {
 	printf("Updating philo %d state\n", phil_id);
-	pthread_mutex_lock(&chopstick_mutex[phil_id]);	
-	
 	if (philo_states[phil_id] == HUNGRY 
 		&& philo_states[left_of_phil(phil_id)] != EATING 
 		&& philo_states[right_of_phil(phil_id)] != EATING)
 	{
 		printf("philo %d can eat now...\n", phil_id);
+		pthread_mutex_lock(&chopstick_mutex[phil_id]);	
 		philo_states[phil_id] = EATING;
 		pthread_cond_signal(&chopstick_conds[phil_id]);
+		pthread_mutex_unlock(&chopstick_mutex[phil_id]);			
 	}
-	pthread_mutex_unlock(&chopstick_mutex[phil_id]);	
 }
 
 void pickup_one_chopstick(int stick_id, int phil_id){
@@ -76,7 +75,6 @@ void pickup_chopsticks(int phil_id){
 	pthread_mutex_lock(&chopstick_mutex[phil_id]);
 	philo_states[phil_id] = HUNGRY;
 	pthread_mutex_unlock(&chopstick_mutex[phil_id]);
-
 	update_philo_state(phil_id);
 
 	pthread_mutex_lock(&chopstick_mutex[phil_id]);	
@@ -85,7 +83,7 @@ void pickup_chopsticks(int phil_id){
 		pthread_cond_wait(&chopstick_conds[phil_id],&chopstick_mutex[phil_id]);
 	}
     pthread_mutex_unlock(&chopstick_mutex[phil_id]);
-
+	
     pickup_one_chopstick(phil_to_chopstick(phil_id, left), phil_id);
     pickup_one_chopstick(phil_to_chopstick(phil_id, right), phil_id);
 }
