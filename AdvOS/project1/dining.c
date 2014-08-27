@@ -51,7 +51,7 @@ void update_philo_state(int phil_id)
 		&& philo_states[right_of_phil(phil_id)] != EATING)
 	{
 		philo_states[phil_id] = EATING;
-		pthread_cond_signal(&chopstick_conds[phil_id],&chopstick_mutex[0]);
+		pthread_cond_signal(&chopstick_conds[phil_id]);
 	}
 }
 
@@ -141,7 +141,7 @@ void putdown_chopsticks(int phil_id){
 	update_philo_state(right_of_phil(phil_id));
 
 	pthread_mutex_unlock(&chopstick_mutex[0]);
-	
+
 }
 
 
