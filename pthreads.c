@@ -77,4 +77,4 @@ int main(int argc, char **argv) {
 	return 0;
 }
 
-//clang -o pthreads.o  string_utilities.c pthreads.c -I/usr/local/Cellar/glib/2.40.0_1/include/glib-2.0 -I/usr/local/Cellar/glib/2.40.0_1/lib/glib-2.0/include -lglib-2.0 -Os -w -pipe -march=native -mmacosx-version-min=10.10
+//clang -g -o pthreads.o  string_utilities.c pthreads.c -I/usr/local/Cellar/glib/2.40.0_1/include/glib-2.0 -I/usr/local/Cellar/glib/2.40.0_1/lib/glib-2.0/include -lglib-2.0 -Os -w -pipe -march=native -mmacosx-version-min=10.10
