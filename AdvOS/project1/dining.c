@@ -66,7 +66,7 @@ void pickup_one_chopstick(int stick_id, int phil_id){
 
    	rc = pthread_cond_timedwait(&chopstick_conds[stick_id],&chopstick_mutex[stick_id],&ts);
    	if (rc == ETIMEDOUT) {
-        printf("Philosopher %d has waited too long and furiously unlocks\n",phil_id);
+        // printf("Philosopher %d has waited too long and furiously unlocks\n",phil_id);
         rc = pthread_mutex_unlock(&chopstick_mutex[stick_id]);
     }
     else

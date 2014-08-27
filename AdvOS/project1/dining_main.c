@@ -58,7 +58,7 @@ int main(){
   srand(time(NULL));
 
   pthread_mutex_init(&servings_mutex, NULL);
-  servings = 10000;
+  servings = 1000;
   
   for(i = 0; i < 5; i++)
   {
