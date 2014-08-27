@@ -64,6 +64,7 @@ int main(){
   {
     pthread_mutex_init(&chopstick_mutex[i], NULL);
     pthread_cond_init(&chopstick_conds[i],NULL);
+    philo_states[i] = 1;
   }
 
   for(i = 0; i < 5; i++)
