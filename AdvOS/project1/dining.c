@@ -56,12 +56,12 @@ void pickup_one_chopstick(int stick_id, int phil_id){
     ts.tv_sec += randTime; //+ (int)stick_id);
 
   	// double randTime = rand() / (RAND_MAX + 1.0);
-  	printf("randTime is %f\n", randTime);
+  	// printf("randTime is %f\n", randTime);
 
   	// printf("asctime of ts:%s",asctime(ts));
     //ts.tv_sec += randTime;
 
-	printf("\nWe are using time of %lld.%.9ld\n", (long long)ts.tv_sec, ts.tv_nsec);
+	// printf("\nWe are using time of %lld.%.9ld\n", (long long)ts.tv_sec, ts.tv_nsec);
 
 	pthread_mutex_lock(&chopstick_mutex[stick_id]);
 
