@@ -17,6 +17,7 @@ struct timespec ts;
 
 pthread_mutex_t chopstick_mutex[5];
 pthread_cond_t chopstick_conds[5];
+int chopsticks[5];
 
 int phil_to_chopstick(int phil_id, direction_t d){
   return (phil_id + d) % 5;      
@@ -63,6 +64,7 @@ void pickup_one_chopstick(int stick_id, int phil_id){
 	printf("\nWe are using time of %lld.%.9ld\n", (long long)ts.tv_sec, ts.tv_nsec);
 
 	pthread_mutex_lock(&chopstick_mutex[stick_id]);
+
    	rc = pthread_cond_timedwait(&chopstick_conds[stick_id],&chopstick_mutex[stick_id],&ts);
    	if (rc == ETIMEDOUT) {
         printf("Philosopher %d has waited too long and furiously unlocks\n",phil_id);
@@ -70,7 +72,8 @@ void pickup_one_chopstick(int stick_id, int phil_id){
     }
     else
     {
-		printf("Philosopher %d picks up chopstick %d \n", phil_id, stick_id);    	
+		printf("Philosopher %d picks up chopstick %d \n", phil_id, stick_id);
+		pthread_mutex_unlock(&chopstick_mutex[stick_id]); //just in case?  	
     }
 	fflush(stdout);
 }
