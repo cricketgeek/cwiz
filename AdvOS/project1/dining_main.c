@@ -3,7 +3,7 @@
 /* No changes are needed to this file*/
 
 double const thinking_to_eating = 0.02;
-double const eating_to_thinking = 0.50;
+double const eating_to_thinking = 0.10;
 
 void eat(int phil_id){
   fprintf(stdout,"Philosopher %d eats\n", phil_id);
