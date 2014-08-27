@@ -46,17 +46,26 @@ int right_of_phil(int phil_id)
 
 void update_philo_state(int phil_id)
 {
+
+	int left = left_of_phil(phil_id);
+	int right = right_of_phil(phil_id);
+
+	pthread_mutex_lock(&chopstick_mutex[phil_id]);	
+	pthread_mutex_lock(&chopstick_mutex[left]);	
+	pthread_mutex_lock(&chopstick_mutex[right]);	
+
 	//printf("Updating philo %d state\n", phil_id);
 	if (philo_states[phil_id] == HUNGRY 
-		&& philo_states[left_of_phil(phil_id)] != EATING 
-		&& philo_states[right_of_phil(phil_id)] != EATING)
+		&& philo_states[left] != EATING 
+		&& philo_states[right] != EATING)
 	{
-		//printf("philo %d can eat now...\n", phil_id);
-		pthread_mutex_lock(&chopstick_mutex[phil_id]);	
+		//printf("philo %d can eat now...\n", phil_id);	
 		philo_states[phil_id] = EATING;
 		pthread_cond_signal(&chopstick_conds[phil_id]);
-		pthread_mutex_unlock(&chopstick_mutex[phil_id]);			
 	}
+	pthread_mutex_lock(&chopstick_mutex[phil_id]);
+	pthread_mutex_lock(&chopstick_mutex[left]);
+	pthread_mutex_lock(&chopstick_mutex[right]);			
 }
 
 void pickup_one_chopstick(int stick_id, int phil_id){
