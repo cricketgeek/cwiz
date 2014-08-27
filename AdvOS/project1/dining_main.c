@@ -32,6 +32,7 @@ void* philosodine(void* arg){
     }
     else{
       servings--;
+      printf("%d servings left\n",servings);
       pthread_mutex_unlock(&servings_mutex);     
     }
 

@@ -114,24 +114,24 @@ void putdown_one_chopstick(int stick_id, int phil_id){
 
 void pickup_chopsticks(int phil_id){  
 
-	pthread_mutex_lock(&chopstick_mutex[0]);
+	pthread_mutex_lock(&chopstick_mutex[phil_id]);
 	philo_states[phil_id] = HUNGRY;
 	update_philo_state(phil_id);
 
 	while(philo_states[phil_id] == HUNGRY)
 	{
-		pthread_cond_wait(&chopstick_conds[phil_id],&chopstick_mutex[0]);
+		pthread_cond_wait(&chopstick_conds[phil_id],&chopstick_mutex[phil_id]);
 	}
 
     pickup_one_chopstick(phil_to_chopstick(phil_id, right), phil_id);
     pickup_one_chopstick(phil_to_chopstick(phil_id, left), phil_id);
 
-    pthread_mutex_unlock(&chopstick_mutex[0]);
+    pthread_mutex_unlock(&chopstick_mutex[phil_id]);
 }
 
 void putdown_chopsticks(int phil_id){
   	/*Use putdown_chopstick to put down the chopsticks*/
-  	pthread_mutex_lock(&chopstick_mutex[0]);
+  	pthread_mutex_lock(&chopstick_mutex[phil_id]);
   	philo_states[phil_id] = THINKING;
 
 	putdown_one_chopstick(phil_to_chopstick(phil_id, right),phil_id);
@@ -140,7 +140,7 @@ void putdown_chopsticks(int phil_id){
 	update_philo_state(left_of_phil(phil_id));
 	update_philo_state(right_of_phil(phil_id));
 
-	pthread_mutex_unlock(&chopstick_mutex[0]);
+	pthread_mutex_unlock(&chopstick_mutex[phil_id]);
 
 }
 
