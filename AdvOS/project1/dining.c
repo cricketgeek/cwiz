@@ -36,7 +36,7 @@ int chopstick_to_phil(int stick_id, direction_t d){
 
 int left_of_phil(int phil_id)
 {
-	return ((phil_id + (NUM_PHILOSOPHERS - 1) % NUM_PHILOSOPHERS);
+	return ((phil_id + (NUM_PHILOSOPHERS - 1)) % NUM_PHILOSOPHERS);
 }
 
 int right_of_phil(int phil_id)
